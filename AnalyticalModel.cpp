@@ -8,21 +8,11 @@ float AnalyticalModel::factorial(float num) {
     }
 }
 AnalyticalModel::AnalyticalModel() {
-    this->n = 1000;
     this->lambda = 2;
     this->mu = 3;
     this->M = 2;
 }
-AnalyticalModel::AnalyticalModel(int n, float lambda, float mu, int M) {
-    this->n = n;
-    this->lambda = lambda;
-    this->mu = mu;
-    this->M = M;   
-}
 
-void AnalyticalModel::setN(int n) {
-    this->n = n;
-}
 void AnalyticalModel::setLambda(float lambda) {
     this->lambda = lambda;   
 }
@@ -33,9 +23,6 @@ void AnalyticalModel::setM(int M) {
     this->M = M;    
 }
 
-int AnalyticalModel::getN() {
-    return n;
-}
 float AnalyticalModel::getLambda() {
     return lambda;    
 }

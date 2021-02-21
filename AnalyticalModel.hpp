@@ -2,7 +2,6 @@
 #define ANALYTICALMODEL_HPP
 class AnalyticalModel {
     private:
-        int n;          //number of arrivals to simulate (1000-5000)
         float lambda;   //average arrivals in a time period
         float mu;       //average number served in time period
         int M;          //number of service channels (1-10)
@@ -10,14 +9,11 @@ class AnalyticalModel {
         float factorial(float num);
     public:
         AnalyticalModel();
-        AnalyticalModel(int n, float lambda, float mu, int M);
 
-        void setN(int n);
         void setLambda(float lambda);
         void setMu(float mu);
         void setM(int M);
 
-        int getN();
         float getLambda();
         float getMu();
         int getM();
