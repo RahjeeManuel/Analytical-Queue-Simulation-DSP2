@@ -7,7 +7,7 @@ class Customer {
         float departureTime;
         float pqTime;
         Customer* nextCustomer;
-    private:
+    public:
         Customer();
         
         void setArrivalTime(float arrivalTime);
