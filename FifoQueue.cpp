@@ -5,13 +5,22 @@ FifoQueue::FifoQueue() {
 }
 
 void FifoQueue::addCustomer(Customer* customer) {
-    tail->setNextCustomer(customer);
-    tail = customer;
+    if (head == nullptr) {
+        head = customer;
+        tail = customer;
+    } else {
+        tail->setNextCustomer(customer);
+        tail = customer;
+    }
 }
 
 Customer* FifoQueue::getNextCustomer() {
-    Customer* next = head;
-    head = head->getNextCustomer();
-    next->setNextCustomer(nullptr);
-    return next;
+    if (head == nullptr) {
+        return nullptr;
+    } else {
+        Customer* next = head;
+        head = head->getNextCustomer();
+        next->setNextCustomer(nullptr);
+        return next;
+    }
 }
