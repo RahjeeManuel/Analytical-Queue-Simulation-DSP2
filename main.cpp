@@ -13,12 +13,12 @@ int main() {
         std::cout << "Enter n (1000-5000):";
         std::cin >> n;
     } while (!(n >= 1000 && n <= 5000));
-    std::cout << "\nEnter lambda:";
+    std::cout << "Enter lambda:";
     std::cin >> lambda;
-    std::cout << "\nEnter mu:";
+    std::cout << "Enter mu:";
     std::cin >> mu;
     do {
-        std::cout << "\nEnter M (1-10):";
+        std::cout << "Enter M (1-10):";
         std::cin >> M;
     } while (!(M >= 1 && M <= 10));
 
