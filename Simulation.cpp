@@ -100,5 +100,5 @@ void Simulation::run(int totalArrivals) {
     cout << "W: " << totalCustomerTime / (float)totalArrivals << endl;
     cout << "Wq: " << totalWaitTime / (float)totalArrivals << endl;
     cout << "Rho: " << totalServiceTime / (M * totalSimTime) << endl;
-    cout << "Wait For Service Probability: " << (float)numWaited / totalArrivals << endl;
+    cout << "Wait probability: " << (float)numWaited / totalArrivals << endl;
 }
