@@ -17,7 +17,10 @@ class PriorityQueue {
         PriorityQueue();
         PriorityQueue(int maxSize);
 
+        bool isEmpty();
+        int getSize();
         void insert(Customer* customer);
+        Customer* getNext();
         Customer* extractNext();
 };
 #endif

@@ -9,6 +9,7 @@ class AnalyticalModel {
         float factorial(float num);
     public:
         AnalyticalModel();
+        AnalyticalModel(float lambda, float mu, int M);
 
         void setLambda(float lambda);
         void setMu(float mu);

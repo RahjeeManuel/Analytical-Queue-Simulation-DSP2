@@ -31,7 +31,7 @@ void PriorityQueue::swap(Customer** a, Customer** b) {
 }
 
 PriorityQueue::PriorityQueue() {
-    this->maxSize = 1000;
+    this->maxSize = 200;
     this->currentSize = 0;
     this->pq = new Customer*[maxSize];
 }
@@ -41,6 +41,16 @@ PriorityQueue::PriorityQueue(int maxSize) {
     this->pq = new Customer*[maxSize];    
 }
 
+bool PriorityQueue::isEmpty() {
+    if (currentSize == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+int PriorityQueue::getSize() {
+    return currentSize;
+}
 void PriorityQueue::insert(Customer* customer) {
     if (currentSize == maxSize) {
         return;
@@ -51,6 +61,13 @@ void PriorityQueue::insert(Customer* customer) {
     while (i != 0 && pq[parent(i)]->getPqTime() > pq[i]->getPqTime()) {
         swap(&pq[i], &pq[parent(i)]);
         i = parent(i);
+    }
+}
+Customer* PriorityQueue::getNext() {
+    if (currentSize <= 0) {
+        return nullptr;         
+    } else {
+        return pq[0];
     }
 }
 Customer* PriorityQueue::extractNext() {

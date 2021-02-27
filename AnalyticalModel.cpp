@@ -12,6 +12,11 @@ AnalyticalModel::AnalyticalModel() {
     this->mu = 3;
     this->M = 2;
 }
+AnalyticalModel::AnalyticalModel(float lambda, float mu, int M) {
+    this->lambda = lambda;
+    this->mu = mu;
+    this->M = M;
+}
 
 void AnalyticalModel::setLambda(float lambda) {
     this->lambda = lambda;   
