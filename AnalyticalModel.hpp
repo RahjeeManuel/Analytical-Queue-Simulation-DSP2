@@ -6,9 +6,8 @@ class AnalyticalModel {
         float mu;       //average number served in time period
         int M;          //number of service channels (1-10)
 
-        float factorial(float num);
+        float factorial(float num); //recursive function to get factorial of num
     public:
-        AnalyticalModel();
         AnalyticalModel(float lambda, float mu, int M);
 
         void setLambda(float lambda);

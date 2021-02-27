@@ -5,7 +5,7 @@ class Customer {
         float arrivalTime;
         float startOfServiceTime;
         float departureTime;
-        float pqTime;
+        float pqTime;               //pq time is the timestamp of event (arrival/departure) in the priority queue
         Customer* nextCustomer;
     public:
         Customer();

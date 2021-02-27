@@ -35,10 +35,8 @@ PriorityQueue::PriorityQueue() {
     this->currentSize = 0;
     this->pq = new Customer*[maxSize];
 }
-PriorityQueue::PriorityQueue(int maxSize) {
-    this->maxSize = maxSize;
-    this->currentSize = 0;
-    this->pq = new Customer*[maxSize];    
+PriorityQueue::~PriorityQueue() {
+    delete[] pq;
 }
 
 bool PriorityQueue::isEmpty() {

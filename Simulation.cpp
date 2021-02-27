@@ -3,14 +3,14 @@
 using namespace std;
 float Simulation::getRandomInterval(float avg) {
     float f = (float)rand()/RAND_MAX;
-    return -1 * (1.0/avg) * log(f);
+    return -1 * (1.0 / avg) * log(f);
 }
 void Simulation::insertArrival() {
     Customer* arrival = new Customer;
     if (prevArrivalTime > 0) {
-        arrival->setArrivalTime(prevArrivalTime + getRandomInterval(lambda)); 
+        arrival->setArrivalTime(prevArrivalTime + getRandomInterval(lambda));   //insert arrival with previous known arrival time
     } else {
-        arrival->setArrivalTime(getRandomInterval(lambda)); 
+        arrival->setArrivalTime(getRandomInterval(lambda));     //insert first arrival
     }
     arrival->setPqTime(arrival->getArrivalTime());
     prevArrivalTime = arrival->getPqTime();
@@ -18,8 +18,8 @@ void Simulation::insertArrival() {
     n--;
 }
 void Simulation::processNextEvent() {
-    Customer* event = pq.extractNext(); 
-    if (event->getPqTime() == event->getArrivalTime()) {
+    Customer* event = pq.extractNext();
+    if (event->getPqTime() == event->getArrivalTime()) {    //is an arrival
         if (availableServers > 0) {
             availableServers--;
             event->setStartOfServiceTime(event->getArrivalTime());
@@ -29,10 +29,10 @@ void Simulation::processNextEvent() {
         } else {
             fq.addCustomer(event);
         }
-    } else {
+    } else {    //is a departure
         availableServers++;
         Customer* nextInFifo = fq.getNextCustomer();
-        if (nextInFifo != nullptr) {
+        if (nextInFifo != nullptr) {    //if a customer is waiting in the fifo queue then,
             nextInFifo->setStartOfServiceTime(event->getDepartureTime());
             nextInFifo->setDepartureTime(nextInFifo->getStartOfServiceTime() + getRandomInterval(mu));
             nextInFifo->setPqTime(nextInFifo->getDepartureTime());
@@ -43,30 +43,31 @@ void Simulation::processNextEvent() {
     }
 }
 void Simulation::processStatistics(Customer* event) {
+    //total simulation time
     totalSimTime = event->getDepartureTime();
+    //idle time before the first arrival in the simulation
     if (totalIdleTime == 0) {
         totalIdleTime = event->getStartOfServiceTime();
     }
+    //idle time
     if (availableServers == M) {
         Customer* next = pq.getNext();
         if (next != nullptr) {
             totalIdleTime = totalIdleTime + next->getArrivalTime() - event->getDepartureTime();   
         }
     }
+    //wait time
     float waitTime = event->getStartOfServiceTime() - event->getArrivalTime();
     if (waitTime > 0) {
         numWaited++;
         totalWaitTime = totalWaitTime + waitTime;
     }
+    //total service and customer system time
     totalServiceTime = totalServiceTime + event->getDepartureTime() - event->getStartOfServiceTime();
     totalCustomerTime = totalCustomerTime + event->getDepartureTime() - event->getArrivalTime();
+    delete event;
 }
 
-Simulation::Simulation() {
-    lambda = 2;
-    mu = 3;
-    M = 2;
-}
 Simulation::Simulation(float lambda, float mu, int M) {
     this->lambda = lambda;
     this->mu = mu;
@@ -76,7 +77,7 @@ Simulation::Simulation(float lambda, float mu, int M) {
 void Simulation::run(int totalArrivals) {
     n = totalArrivals;
     availableServers = M;
-
+    //reset variables
     prevArrivalTime = 0;
     totalSimTime = 0;
     totalIdleTime = 0;
@@ -84,16 +85,16 @@ void Simulation::run(int totalArrivals) {
     totalWaitTime = 0;
     totalServiceTime = 0; 
     totalCustomerTime = 0;
-
+    //place first arrival
     insertArrival();
-
+    //simulation loop
     while (pq.isEmpty() == false) {
         processNextEvent();
         if (n > 0 && pq.getSize() < M + 1) {
             insertArrival();
         }
     }
-
+    //display results
     cout << "\nSimulation: "  << endl;
     cout << "Po: " << totalIdleTime / totalSimTime << endl;
     cout << "W: " << totalCustomerTime / (float)totalArrivals << endl;

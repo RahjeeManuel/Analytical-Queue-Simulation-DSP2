@@ -7,11 +7,6 @@ float AnalyticalModel::factorial(float num) {
         return 1;
     }
 }
-AnalyticalModel::AnalyticalModel() {
-    this->lambda = 2;
-    this->mu = 3;
-    this->M = 2;
-}
 AnalyticalModel::AnalyticalModel(float lambda, float mu, int M) {
     this->lambda = lambda;
     this->mu = mu;

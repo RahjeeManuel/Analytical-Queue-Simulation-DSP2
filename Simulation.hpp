@@ -7,10 +7,11 @@ class Simulation {
     private:
         PriorityQueue pq;
         FifoQueue fq;
-        int n;
-        float lambda;
-        float mu;
-        int M;
+        
+        int n;              //number of arrivals to simulate
+        float lambda;       //average arrivals in a time period
+        float mu;           //average number served in time period
+        int M;              //number of service channels (1-10)
 
         int availableServers;
         float prevArrivalTime;
@@ -26,7 +27,6 @@ class Simulation {
         void processNextEvent();
         void processStatistics(Customer* event);
     public:
-        Simulation();
         Simulation(float lambda, float mu, int M);
         void run(int n);
 };

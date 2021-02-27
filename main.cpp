@@ -8,6 +8,7 @@ int main() {
     float mu;
     int M;
 
+    //Asks for inputs
     do {
         std::cout << "Enter n (1000-5000):";
         std::cin >> n;
@@ -21,6 +22,7 @@ int main() {
         std::cin >> M;
     } while (!(M >= 1 && M <= 10));
 
+    //Display analytical model results
     AnalyticalModel am(lambda, mu, M);
     cout << "\nAnalytical Model:" << endl;
     cout << "Po: " << am.getPo() << endl;
@@ -28,6 +30,7 @@ int main() {
     cout << "Wq: " << am.getWq() << endl;
     cout << "Rho: " << am.getRho() << endl;
 
+    //Run simulation and display results
     Simulation s(lambda, mu, M);
     s.run(n);
 
