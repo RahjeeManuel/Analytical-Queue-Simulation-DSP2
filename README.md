@@ -1,2 +1,2 @@
 # dsp2
-A Queue Simulation
+Analytical Queue Simulation
